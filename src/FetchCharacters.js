@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
+import { fetchCharacters } from './actions'
+import { connect } from 'react-redux'
 
 const FetchCharacters = ({ fetchCharacters }) => {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState('')
 
   const handleChange = (event) => {
-    const newValue = event.target.value;
+    const newValue = event.target.value
 
-    setValue(newValue);
+    setValue(newValue)
 
-    if (fetchCharacters) fetchCharacters(newValue);
-  };
+    if (fetchCharacters) fetchCharacters(newValue)
+  }
 
   return (
     <input
@@ -18,7 +20,7 @@ const FetchCharacters = ({ fetchCharacters }) => {
       type="search"
       value={value}
     />
-  );
-};
+  )
+}
 
-export default FetchCharacters;
+export default connect(null, { fetchCharacters })(FetchCharacters)

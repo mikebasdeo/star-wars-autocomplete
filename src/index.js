@@ -8,16 +8,24 @@ import reducer from './reducer'
 
 import FetchCharacters from './FetchCharacters'
 import Characters from './Characters'
-import thunk from 'redux-thunk'
+// import thunk from 'redux-thunk'
 import { createEpicMiddleware } from 'redux-observable'
+import rootEpic from './fetch-character-epic'
 
 import './styles.scss'
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
+const epicMiddleware = createEpicMiddleware()
+
 // const store = createStore(reducer);
 
-const store = createStore(reducer, composeEnhancer(applyMiddleware(thunk)))
+const store = createStore(
+  reducer,
+  composeEnhancer(applyMiddleware(epicMiddleware)),
+)
+
+epicMiddleware.run(rootEpic)
 
 const Application = () => {
   return (

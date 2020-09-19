@@ -1,7 +1,7 @@
-import { search } from './api'
+// import { search } from './api'
 
 export const FETCH_CHARACTERS = 'FETCH_CHARACTERS'
-export const FETCH_FULFILLED = 'FETCH_FULFILLED'
+export const FETCH_CHARACTERS_FULFILLED = 'FETCH_CHARACTERS_FULFILLED'
 
 // Thunk'd action creator -> calls regular redux action when promise resolves
 // export const fetchTweets = () => {
@@ -25,6 +25,6 @@ export const fetchCharacters = (searchTerm) => {
 }
 
 export const fetchCharactersFulfilled = (payload) => ({
-  type: FETCH_FULFILLED,
+  type: FETCH_CHARACTERS_FULFILLED,
   payload,
 })

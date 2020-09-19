@@ -1,6 +1,8 @@
-import React from 'react';
+import React from 'react'
+// import { fetchCharacters } from './actions'
+import { connect } from 'react-redux'
 
-import Character from './Character';
+import Character from './Character'
 
 const Characters = ({ characters = [] }) => {
   return (
@@ -9,7 +11,11 @@ const Characters = ({ characters = [] }) => {
         <Character key={character.id} character={character} />
       ))}
     </section>
-  );
-};
+  )
+}
 
-export default Characters;
+const mapStateToProps = ({ characters }) => ({
+  characters,
+})
+
+export default connect(mapStateToProps)(Characters)
