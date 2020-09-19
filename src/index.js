@@ -1,17 +1,23 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react'
+import ReactDOM from 'react-dom'
 
-import { createStore } from 'redux';
-import { Provider } from 'react-redux';
+import { createStore, compose, applyMiddleware } from 'redux'
+import { Provider } from 'react-redux'
 
-import reducer from './reducer';
+import reducer from './reducer'
 
-import FetchCharacters from './FetchCharacters';
-import Characters from './Characters';
+import FetchCharacters from './FetchCharacters'
+import Characters from './Characters'
+import thunk from 'redux-thunk'
+import { createEpicMiddleware } from 'redux-observable'
 
-import './styles.scss';
+import './styles.scss'
 
-const store = createStore(reducer);
+const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+
+// const store = createStore(reducer);
+
+const store = createStore(reducer, composeEnhancer(applyMiddleware(thunk)))
 
 const Application = () => {
   return (
@@ -20,14 +26,14 @@ const Application = () => {
       <FetchCharacters />
       <Characters />
     </div>
-  );
-};
+  )
+}
 
-const rootElement = document.getElementById('root');
+const rootElement = document.getElementById('root')
 
 ReactDOM.render(
   <Provider store={store}>
     <Application />
   </Provider>,
   rootElement,
-);
+)
